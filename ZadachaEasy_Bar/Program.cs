@@ -77,7 +77,7 @@ namespace ZadachaEasy_Bar
         public override string ToString() => $"Бар #{id}\nНаименование:'{name}'\nВладелец:'{owner}'\nЗдесь доступны напитки:\n{string.Join("\n",drinks.Select(x=>x.ToString()))}";
     }
 
-    public struct Drink
+    public class Drink
     {
         public string name;
         public decimal price;
