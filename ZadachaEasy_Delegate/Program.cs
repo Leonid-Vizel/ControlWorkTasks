@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace ZadachaEasy_Delegate
 {
@@ -10,29 +9,77 @@ namespace ZadachaEasy_Delegate
         {
             List<Sotrudnik> collection = new List<Sotrudnik>();
             Random random = new Random(DateTime.Now.Millisecond);
+
             for (int i = 0; i < 20; i++)
             {
-                collection.Add(new Sotrudnik($"имя{random.Next(0, 100)}","1234", (byte)random.Next(0,11),true));
+                collection.Add(new Sotrudnik($"имя{random.Next(0, 100)}", "1234", (byte)random.Next(0, 11), true));
                 Console.WriteLine(collection[i].ToString());
             }
             Console.WriteLine("\n\n");
-            SortDelegate @delegate = new SortDelegate(SortExamp);
-            @delegate.Invoke(ref collection);
+            Comparison<Sotrudnik> comp1 = new Comparison<Sotrudnik>(CompareName);
+            Comparison<Sotrudnik> comp2 = new Comparison<Sotrudnik>(CompareNaglost);
+            Comparison<Sotrudnik> comp3 = new Comparison<Sotrudnik>(CompareStupid);
+            collection.Sort(comp1);
+            collection.ForEach(x=>Console.WriteLine(x));
+            Console.WriteLine("\n\n");
+            collection.Sort(comp2);
+            collection.ForEach(x => Console.WriteLine(x));
+            Console.WriteLine("\n\n");
+            collection.Sort(comp3);
+            collection.ForEach(x => Console.WriteLine(x));
+            Console.ReadKey();
+        }
 
-            foreach (Sotrudnik sotrudnik in collection)
+        public static int CompareName(Sotrudnik x, Sotrudnik y)
+        {
+            if (x.Name.Length < y.Name.Length)
             {
-                Console.WriteLine(sotrudnik.ToString());
+                return -1;
+            }
+            else if (x.Name.Length == y.Name.Length)
+            {
+                return 0;
+            }
+            else
+            {
+                return 1;
             }
         }
 
-        //Как продемонстрировать без методов в классе?
-        private static void SortExamp(ref List<Sotrudnik> sotrudniks)
+        public static int CompareNaglost(Sotrudnik x, Sotrudnik y)
         {
-            sotrudniks = sotrudniks.OrderBy(x => x.Name).ThenBy(x => x.naglost).ThenBy(x => x.stupid).ToList();
+            if (x.naglost < y.naglost)
+            {
+                return -1;
+            }
+            else if (x.naglost == y.naglost)
+            {
+                return 0;
+            }
+            else
+            {
+                return 1;
+            }
+        }
+
+        public static int CompareStupid(Sotrudnik x, Sotrudnik y)
+        {
+            if (!x.stupid && y.stupid)
+            {
+                return -1;
+            }
+            else if ((x.stupid && y.stupid) || (!x.stupid && !y.stupid))
+            {
+                return 0;
+            }
+            else
+            {
+                return 1;
+            }
         }
     }
 
-    public delegate void SortDelegate(ref List<Sotrudnik> sotrudniks);
+    public delegate int ComparisonDelegate<in Sotrudnik>(Sotrudnik x, Sotrudnik y);
 
     public class Sotrudnik
     {
