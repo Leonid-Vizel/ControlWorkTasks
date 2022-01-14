@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zadacha_Remont", "Zadacha_R
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zadacha_Toilet", "Zadacha_Toilet\Zadacha_Toilet.csproj", "{05120620-BDF8-42C1-A1BA-75C0D35CD85C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zadacha_FSB", "Zadachi\Zadacha_FSB.csproj", "{391B8B0D-ED27-430E-90E8-C094FBD86293}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zadacha_FSB", "Zadacha_FSB\Zadacha_FSB.csproj", "{391B8B0D-ED27-430E-90E8-C094FBD86293}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
