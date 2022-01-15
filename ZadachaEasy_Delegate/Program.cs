@@ -79,8 +79,6 @@ namespace ZadachaEasy_Delegate
         }
     }
 
-    public delegate int ComparisonDelegate<in Sotrudnik>(Sotrudnik x, Sotrudnik y);
-
     public class Sotrudnik
     {
         public string Name { get; private set; }
